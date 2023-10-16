@@ -54,8 +54,9 @@ const Editor: NextPage = () => {
           <Controller
             name="data_html"
             control={control}
-            render={({ field: { value, onChange } }) => (
-              <RichTextEditor
+            render={({ field: { value, onChange } }) => {
+              if(value==null)return <></>;
+              return  <RichTextEditor
                 uploadFile={fileService.getUploadFileFunction(workspaceSlug as string)}
                 deleteFile={fileService.deleteImage}
                 borderOnFocus={false}
@@ -73,7 +74,7 @@ const Editor: NextPage = () => {
                   setValue("data", JSON.stringify(description));
                 }}
               />
-            )}
+            }}
           />
           {isEditable && (
             <Button
